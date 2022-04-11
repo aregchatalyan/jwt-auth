@@ -1,13 +1,13 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
-import LoginForm from "./components/LoginForm";
-import { Context } from "./index";
-import { observer } from "mobx-react-lite";
-import { IUser } from "./models/IUser";
-import UserService from "./services/UserService";
+import LoginForm from './components/LoginForm';
+import { Context } from './index';
+import { observer } from 'mobx-react-lite';
+import { IUser } from './models/IUser';
+import UserService from './services/UserService';
 
 const App: FC = () => {
-  const {store} = useContext(Context);
-  const [users, setUsers] = useState<IUser[]>([]);
+  const { store } = useContext(Context);
+  const [ users, setUsers ] = useState<IUser[]>([]);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -25,7 +25,7 @@ const App: FC = () => {
   }
 
   if (store.isLoading) {
-    return <div>Загрузка...</div>
+    return <div>Загрузка...</div>;
   }
 
   if (!store.isAuth) {

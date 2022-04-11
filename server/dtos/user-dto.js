@@ -8,4 +8,4 @@ module.exports = class UserDto {
     this.email = model.email;
     this.isActivated = model.isActivated;
   }
-}
+};

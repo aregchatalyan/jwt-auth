@@ -9,7 +9,7 @@ class TokenService {
     return {
       accessToken,
       refreshToken
-    }
+    };
   }
 
   validateAccessToken(token) {
