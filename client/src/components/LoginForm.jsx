@@ -1,10 +1,10 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 
-const LoginForm: FC = () => {
-  const [ email, setEmail ] = useState<string>('');
-  const [ password, setPassword ] = useState<string>('');
+const LoginForm = () => {
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
   const { store } = useContext(Context);
 
   return (

@@ -2,12 +2,10 @@ import axios from 'axios';
 import { makeAutoObservable } from 'mobx';
 
 import { API_URL } from '../http';
-import { IUser } from '../models/IUser';
 import AuthService from '../services/AuthService';
-import { AuthResponse } from '../models/response/AuthResponse';
 
 export default class Store {
-  user = {} as IUser;
+  user = {};
   isAuth = false;
   isLoading = false;
 
@@ -15,19 +13,19 @@ export default class Store {
     makeAutoObservable(this);
   }
 
-  setAuth(bool: boolean) {
+  setAuth(bool) {
     this.isAuth = bool;
   }
 
-  setUser(user: IUser) {
+  setUser(user) {
     this.user = user;
   }
 
-  setLoading(bool: boolean) {
+  setLoading(bool) {
     this.isLoading = bool;
   }
 
-  async login(email: string, password: string) {
+  async login(email, password) {
     try {
       const response = await AuthService.login(email, password);
       console.log(response);
@@ -39,7 +37,7 @@ export default class Store {
     }
   }
 
-  async registration(email: string, password: string) {
+  async registration(email, password) {
     try {
       const response = await AuthService.registration(email, password);
       console.log(response);
@@ -53,10 +51,10 @@ export default class Store {
 
   async logout() {
     try {
-      const response = await AuthService.logout();
+      await AuthService.logout();
       localStorage.removeItem('token');
       this.setAuth(false);
-      this.setUser({} as IUser);
+      this.setUser({});
     } catch (e) {
       console.log(e.response?.data?.message);
     }
@@ -65,7 +63,7 @@ export default class Store {
   async checkAuth() {
     this.setLoading(true);
     try {
-      const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true });
+      const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
       console.log(response);
       localStorage.setItem('token', response.data.accessToken);
       this.setAuth(true);
